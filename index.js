@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
 
     switch (data.type) {
       case "to":
-        io.to(socket.id).emit("chat:message", data);
+        io.to(data.userreceiver).emit("chat:message", data);
         break;
       case "all":
         /* envia a todoa los usuarios incluyendo al emisor */

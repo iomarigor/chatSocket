@@ -6,17 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Socket.io</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
 
 </head>
 
 <body>
-    <div id="chat-container">
-        <div id="chat-title">
+    <div class="chat-container">
+        <div class="chat-title">
             <p>Chat Socket.IO</p>
+            <p id="chat-use-id">******</p>
             <p> <p id="title-pais">Pais</p>
                 <select id="selected-region" name="select">
                     <option value="PE" selected>Perú</option>
@@ -24,22 +22,28 @@
                 </select>
             </p>
             
-            <p id="chat-use-id">******</p>
+            
         </div>
-        <div id="chat-title">
-            <p> <p id="title-fecha">Fecha</p>
-                <p id="date-zone">2021-12-03</p>
+        <div class="chat-title">
+            <p> 
+                <p id="title-fecha">Fecha</p>
+                <p>2021-12-03</p>
             </p>
-            <p> <p id="title-hora">Hora</p> 
+            <p> 
+                <p id="title-hora">Hora</p> 
                 <p id="hour-zone">00:00</p>
             </p>
-            <p>Dollar: 1  =</p> 
-            <p id="zone-z">PEN</p>
+            <p >
+                PEN:
+                    <input type="number" id="dollar" min="1" value="1" onchange="soapRequest()"/>
+                =
+            </p> 
+            <p >USD</p>
             <p id="currency-zone">00.00
             </p>
             
         </div>
-        <div id="chat-window">
+        <div class="chat-window">
             <div id="output">
 
             </div>
