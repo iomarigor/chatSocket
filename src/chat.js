@@ -185,8 +185,13 @@ function soapRequest() {
 
   function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
+
     if ("withCredentials" in xhr) {
       xhr.open(method, url, false);
+      xhr.setRequestHeader(
+        "Authorization",
+        "Bearer duidox3ssakpq48sz91a14xqwebgr6"
+      );
     } else if (typeof XDomainRequest != "undefined") {
       alert;
       xhr = new XDomainRequest();
