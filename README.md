@@ -1,7 +1,7 @@
 # chatSocket
-Requerimientos Minimos:
+- Requerimientos Minimos:
 Soap ui - desplegado
 Nodejs
 
-Levantar en desarrollo:
+- Raise server:
 npm run dev
