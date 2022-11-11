@@ -1,4 +1,3 @@
-//io('http://localhost:4000/');
 const socket = io();
 
 let message = document.getElementById("message");
@@ -23,9 +22,7 @@ let m = addZero(Xmas95.getMinutes());
 let s = addZero(Xmas95.getSeconds());
 let time = h + ":" + m + ":" + s;
 hour_zone.innerHTML = time;
-//changeZone(selected_region.options[selected_region.selectedIndex].value);
 selected_region.addEventListener("change", function () {
-  //console.log("change",selected_region.options[selected_region.selectedIndex].value)
   socket.emit("zone:change", {
     zone: selected_region.options[selected_region.selectedIndex].value,
   });
@@ -74,7 +71,10 @@ const changeZone = (zone) => {
       break;
   }
 };
-btnSend.addEventListener("click", function () {
+var sendFunction = function () {
+  if (message.value == "") {
+    return;
+  }
   let sendDataMsm = {};
   switch (message.value.split(" ")[0]) {
     case "/p":
@@ -84,6 +84,7 @@ btnSend.addEventListener("click", function () {
       ) {
         sendDataMsm = {
           type: "to",
+          usersend: user_id.innerHTML,
           userreceiver: message.value.split(" ")[1],
           username: username.value,
           message: message.value.split(" ")[2],
@@ -99,6 +100,7 @@ btnSend.addEventListener("click", function () {
     default:
       sendDataMsm = {
         type: "all",
+        usersend: user_id.innerHTML,
         username: username.value,
         message: message.value,
       };
@@ -117,7 +119,9 @@ btnSend.addEventListener("click", function () {
             </p>`;
       break;
   }
-});
+  message.value = "";
+};
+btnSend.addEventListener("click", sendFunction);
 message.addEventListener("keypress", function () {
   socket.emit("chat:typing", username.value);
 });
@@ -137,14 +141,20 @@ socket.on("chat:message", function (data) {
   console.log(data);
   switch (data.type) {
     case "to":
-      output.innerHTML += `<p>
-                <strong>(Privado) ${data.username}</strong>: ${data.message}
-            </p>`;
+      if (data.usersend != user_id.innerHTML) {
+        output.innerHTML += `<p>
+          <strong>(Privado) ${data.username}</strong>: ${data.message}
+        </p>`;
+      }
+
       break;
     case "all":
-      output.innerHTML += `<p>
-                <strong>(Publico) ${data.username}</strong>: ${data.message}
-            </p>`;
+      if (data.usersend != user_id.innerHTML) {
+        output.innerHTML += `<p>
+          <strong>(Publico) ${data.username}</strong>: ${data.message}
+        </p>`;
+      }
+
       break;
   }
 });

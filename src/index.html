@@ -51,9 +51,11 @@
 
             </div>
         </div>
-        <input type="text" id="username" placeholder="Username">
-        <input type="text" id="message" placeholder="Message">
-        <button id="send">Enviar</button>
+        <form  onsubmit="sendFunction(); return false;" autocomplete="off">
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="message" placeholder="Message">
+            <button type="submit" id="send">Enviar</button>
+        </form>
     </div>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
